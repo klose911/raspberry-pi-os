@@ -11,5 +11,7 @@ GPATH
 GRTAGS
 GSYMS
 GTAGS
+
+# TAGS file 
 **/tags
 **/TAGS
