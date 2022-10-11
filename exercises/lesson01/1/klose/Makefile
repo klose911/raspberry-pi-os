@@ -1,4 +1,4 @@
-ARMGNU ?= aarch64-none-linux-gnu
+ARMGNU ?= aarch64-linux-gnu
 
 COPS = -Wall -nostdlib -nostartfiles -ffreestanding -Iinclude -mgeneral-regs-only
 ASMOPS = -Iinclude 
@@ -13,10 +13,10 @@ clean :
 
 $(BUILD_DIR)/%_c.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
-	$(ARMGNU)-gcc.exe $(COPS) -MMD -c $< -o $@
+	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
 
 $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
-	$(ARMGNU)-gcc.exe $(ASMOPS) -MMD -c $< -o $@
+	$(ARMGNU)-gcc $(ASMOPS) -MMD -c $< -o $@
 
 C_FILES = $(wildcard $(SRC_DIR)/*.c)
 ASM_FILES = $(wildcard $(SRC_DIR)/*.S)
@@ -27,5 +27,5 @@ DEP_FILES = $(OBJ_FILES:%.o=%.d)
 -include $(DEP_FILES)
 
 kernel8.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
-	$(ARMGNU)-ld.exe -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel8.elf  $(OBJ_FILES)
-	$(ARMGNU)-objcopy.exe $(BUILD_DIR)/kernel8.elf -O binary kernel8.img
+	$(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel8.elf  $(OBJ_FILES)
+	$(ARMGNU)-objcopy $(BUILD_DIR)/kernel8.elf -O binary kernel8.img
