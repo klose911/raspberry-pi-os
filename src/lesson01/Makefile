@@ -1,5 +1,10 @@
 ARMGNU ?= aarch64-linux-gnu
 
+detected_OS := $(shell sh -c 'uname 2>/dev/null || echo Unknown')
+
+ifeq ($(detected_OS),FreeBSD || $(detected_OS),NetBSD)
+	ARMGNU = aarch64-none-elf
+
 COPS = -Wall -nostdlib -nostartfiles -ffreestanding -Iinclude -mgeneral-regs-only
 ASMOPS = -Iinclude 
 
