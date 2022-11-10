@@ -1,10 +1,32 @@
-ARMGNU := aarch64-none-linux-gnu
+ifeq ($(OS),Windows_NT) 
+    ARMGNU := aarch64-none-linux-gnu
+endif 
 
-detected_OS := $(shell sh -c 'uname 2>/dev/null || echo Unknown')
+uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
+#uname_M := $(shell sh -c 'uname -m 2>/dev/null || echo not')
+#uname_O := $(shell sh -c 'uname -o 2>/dev/null || echo not')
 
-ifeq ($(detected_OS),NetBSD)
+ifeq ($(uname_S),Linux)
+	DISTR_ID := $(shell lsb_release -si)
+
+	ifeq ($(DISTR_ID), Gentoo)
+		ARMGNU := aarch64-none-linux-gnu
+	else
+		ARMGNU := aarch64-linux-gnu
+	endif 
+endif
+
+ifeq ($(unmae_S),FreeBSD)
 	ARMGNU := aarch64-none-elf
 endif	
+
+ifeq ($(unmae_S),NetBSD)
+	ARMGNU := aarch64-none-elf
+endif
+
+ifeq ($(uname_S),Darwin)
+	ARMGNU := aarch64-none-elf
+endif
 
 COPS = -Wall -nostdlib -nostartfiles -ffreestanding -Iinclude -mgeneral-regs-only
 ASMOPS = -Iinclude 
@@ -35,3 +57,6 @@ DEP_FILES = $(OBJ_FILES:%.o=%.d)
 kernel8.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
 	$(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel8.elf  $(OBJ_FILES)
 	$(ARMGNU)-objcopy $(BUILD_DIR)/kernel8.elf -O binary kernel8.img
+
+echo :
+	@echo $(ARMGNU) 
