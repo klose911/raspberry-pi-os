@@ -1,0 +1,493 @@
+cscope 15 /cygdrive/c/Users/I514692/Documents/programming/os/raspberry-pi-os/exercises/lesson01/2/klose/src               0000002618
+	@kernel.c
+
+1 
+	~"möi_u¨t.h
+"
+
+3 
+	$kî√l_maö
+()
+
+5 
+	`möi_u¨t_öô
+();
+
+6 
+	`möi_u¨t_£nd_°rög
+("Hello, world!\r\n");
+
+9 
+	`möi_u¨t_£nd
+(
+	`möi_u¨t_ªcv
+());
+
+11 
+	}
+}
+
+	@mini_uart.c
+
+1 
+	~"utûs.h
+"
+
+2 
+	~"≥rùhîÆs/möi_u¨t.h
+"
+
+3 
+	~"≥rùhîÆs/gpio.h
+"
+
+5 
+	$möi_u¨t_£nd
+ ( 
+c
+ )
+
+8 if(
+	`gë32
+(
+AUX_MU_LSR_REG
+)&0x20)
+
+11 
+	`put32
+(
+AUX_MU_IO_REG
+,
+c
+);
+
+12 
+	}
+}
+
+14 
+	$möi_u¨t_ªcv
+ ( )
+
+17 if(
+	`gë32
+(
+AUX_MU_LSR_REG
+)&0x01)
+
+20 (
+	`gë32
+(
+AUX_MU_IO_REG
+)&0xFF);
+
+21 
+	}
+}
+
+23 
+	$möi_u¨t_£nd_°rög
+(* 
+°r
+)
+
+25 
+i
+ = 0; 
+°r
+[i] != '\0'; i ++) {
+
+26 
+	`möi_u¨t_£nd
+(()
+°r
+[
+i
+]);
+
+28 
+	}
+}
+
+30 
+	$möi_u¨t_öô
+ ( )
+
+32 
+£À˘‹
+;
+
+34 
+£À˘‹
+ = 
+	`gë32
+(
+GPFSEL1
+);
+
+35 
+£À˘‹
+ &= ~(7<<12);
+
+36 
+£À˘‹
+ |= 2<<12;
+
+37 
+£À˘‹
+ &= ~(7<<15);
+
+38 
+£À˘‹
+ |= 2<<15;
+
+39 
+	`put32
+(
+GPFSEL1
+,
+£À˘‹
+);
+
+41 
+	`put32
+(
+GPPUD
+,0);
+
+42 
+	`dñay
+(150);
+
+43 
+	`put32
+(
+GPPUDCLK0
+,(1<<14)|(1<<15));
+
+44 
+	`dñay
+(150);
+
+45 
+	`put32
+(
+GPPUDCLK0
+,0);
+
+47 
+	`put32
+(
+AUX_ENABLES
+,1);
+
+48 
+	`put32
+(
+AUX_MU_CNTL_REG
+,0);
+
+49 
+	`put32
+(
+AUX_MU_IER_REG
+,0);
+
+50 
+	`put32
+(
+AUX_MU_LCR_REG
+,3);
+
+51 
+	`put32
+(
+AUX_MU_MCR_REG
+,0);
+
+52 
+	`put32
+(
+AUX_MU_BAUD_REG
+,270);
+
+54 
+	`put32
+(
+AUX_MU_CNTL_REG
+,3);
+
+55 
+	}
+}
+
+	@uart.c
+
+1 
+	~"utûs.h
+"
+
+2 
+	~"u¨t.h
+"
+
+3 
+	~"≥rùhîÆs/u¨t.h
+"
+
+4 
+	~"≥rùhîÆs/gpio.h
+"
+
+6 
+bzîo
+(*, );
+
+8 
+	$bzîo
+(* 
+de°
+, 
+byãs
+) {
+
+9 * 
+d
+ = 
+de°
+;
+
+10 
+byãs
+--) {
+
+11 *
+d
+++ = 0;
+
+13 
+	}
+}
+
+15 
+	$u¨t_öô
+()
+
+17 
+u¨t_c⁄åﬁ_t
+ 
+c⁄åﬁ
+;
+
+19 
+	`bzîo
+(&
+c⁄åﬁ
+, 4);
+
+20 
+	`put32
+(
+UART0_CR
+, 
+c⁄åﬁ
+.
+as_öt
+);
+
+24 
+	`put32
+(
+GPPUD
+, 0x00000000);
+
+25 
+	`dñay
+(150);
+
+28 
+	`put32
+(
+GPPUDCLK0
+, (1 << 14) | (1 << 15));
+
+29 
+	`dñay
+(150);
+
+32 
+	`put32
+(
+GPPUDCLK0
+, 0x00000000);
+
+35 
+	`put32
+(
+UART0_ICR
+, 0x7FF);
+
+43 
+	`put32
+(
+UART0_IBRD
+, 1);
+
+45 
+	`put32
+(
+UART0_FBRD
+, 40);
+
+48 
+	`put32
+(
+UART0_LCRH
+, (1 << 4) | (1 << 5) | (1 << 6));
+
+51 
+	`put32
+(
+UART0_IMSC
+, (1 << 1) | (1 << 4) | (1 << 5) | (1 << 6) |
+
+55 
+c⁄åﬁ
+.
+u¨t_íabÀd
+ = 1;
+
+56 
+c⁄åﬁ
+.
+å™smô_íabÀd
+ = 1;
+
+57 
+c⁄åﬁ
+.
+ª˚ive_íabÀd
+ = 1;
+
+58 
+	`put32
+(
+UART0_CR
+, 
+c⁄åﬁ
+.
+as_öt
+);
+
+59 
+	}
+}
+
+62 
+u¨t_Êags_t
+ 
+	$ªad_Êags
+() {
+
+63 
+u¨t_Êags_t
+ 
+Êags
+;
+
+64 
+Êags
+.
+as_öt
+ = 
+	`gë32
+(
+UART0_FR
+);
+
+65  
+Êags
+;
+
+66 
+	}
+}
+
+68 
+	$u¨t_putc
+(
+c
+)
+
+70 
+u¨t_Êags_t
+ 
+Êags
+;
+
+74 
+Êags
+ = 
+	`ªad_Êags
+();
+
+76  
+Êags
+.
+å™smô_queue_fuŒ
+ );
+
+77 
+	`put32
+(
+UART0_DR
+, 
+c
+);
+
+78 
+	}
+}
+
+80 
+	$u¨t_gëc
+()
+
+83 
+u¨t_Êags_t
+ 
+Êags
+;
+
+85 
+Êags
+ = 
+	`ªad_Êags
+();
+
+87  
+Êags
+.
+ªcõve_queue_em±y
+ );
+
+88  
+	`gë32
+(
+UART0_DR
+);
+
+89 
+	}
+}
+
+	@
+1
+.
+1
+/usr/include
+3
+28
+kernel.c
+mini_uart.c
+uart.c
