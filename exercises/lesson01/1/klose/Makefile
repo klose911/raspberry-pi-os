@@ -3,7 +3,7 @@ uname_M := $(shell sh -c 'uname -m 2>/dev/null || echo not')
 ifneq (,$(findstring arm,$(uname_M))) # for arm raspbian 
 	ARMGNU := aarch64-linux-gnu
 else # for x64 
-	ifeq ($(OS),Windows_NT)
+	ifeq ($(OS),Windows_NT) 
 		ARMGNU := aarch64-none-linux-gnu
 	else 
 		uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
